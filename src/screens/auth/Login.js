@@ -12,7 +12,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ROUTES } from '../../utils';
-import { resetLogin, userLogin } from '../../app/reducers/auth';
+import { resetLogin, resetLoginUi, userLogin } from '../../app/reducers/auth';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -20,6 +20,10 @@ const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { isLoading, isError, errorMessage } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    dispatch(resetLoginUi());
+  }, [dispatch]);
 
   useEffect(() => {
     if (isError) {

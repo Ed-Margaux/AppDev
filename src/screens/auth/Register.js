@@ -13,7 +13,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../utils';
-import { resetRegister, userRegister } from '../../app/reducers/auth';
+import { resetRegister, resetRegisterUi, userRegister } from '../../app/reducers/auth';
 
 const PINK = '#E91E63';
 const ORANGE = '#FF9800';
@@ -55,6 +55,10 @@ const Register = () => {
   const { registerLoading, registerError, registerData } = useSelector(
     state => state.auth,
   );
+
+  useEffect(() => {
+    dispatch(resetRegisterUi());
+  }, [dispatch]);
 
   const warnings = {
     email: getEmailWarning(email),
