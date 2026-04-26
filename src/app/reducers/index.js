@@ -16,7 +16,14 @@ const rootPersistConfig = {
 const authPersistConfig = {
   key: 'auth',
   storage: AsyncStorage,
-  blacklist: [],
+  // Do not persist transient UI flags (can get stuck true if app closes mid-request)
+  blacklist: [
+    'isLoading',
+    'isError',
+    'errorMessage',
+    'registerLoading',
+    'registerError',
+  ],
 };
 
 // Combine Reducers

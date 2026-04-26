@@ -4,12 +4,14 @@ import {
   USER_LOGIN_ERROR,
   USER_LOGIN_REQUEST,
   USER_LOGIN_RESET,
+  USER_LOGIN_UI_RESET,
   USER_LOGOUT,
   USER_REGISTER,
   USER_REGISTER_COMPLETED,
   USER_REGISTER_ERROR,
   USER_REGISTER_REQUEST,
   USER_REGISTER_RESET,
+  USER_REGISTER_UI_RESET,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -63,6 +65,14 @@ export default function reducer(state = INITIAL_STATE, action) {
         errorMessage: null,
       };
 
+    case USER_LOGIN_UI_RESET:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        errorMessage: null,
+      };
+
     case USER_LOGOUT:
       return {
         ...state,
@@ -104,6 +114,13 @@ export default function reducer(state = INITIAL_STATE, action) {
         registerError: null,
       };
 
+    case USER_REGISTER_UI_RESET:
+      return {
+        ...state,
+        registerLoading: false,
+        registerError: null,
+      };
+
     default:
       return state;
   }
@@ -118,6 +135,10 @@ export const resetLogin = () => ({
   type: USER_LOGIN_RESET,
 });
 
+export const resetLoginUi = () => ({
+  type: USER_LOGIN_UI_RESET,
+});
+
 export const userLogout = () => ({
   type: USER_LOGOUT,
 });
@@ -129,4 +150,8 @@ export const userRegister = payload => ({
 
 export const resetRegister = () => ({
   type: USER_REGISTER_RESET,
+});
+
+export const resetRegisterUi = () => ({
+  type: USER_REGISTER_UI_RESET,
 });
